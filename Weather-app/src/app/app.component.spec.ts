@@ -1,35 +1,47 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { WeatherService } from './weather.service';
+import { of, throwError } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let weatherServiceSpy: jasmine.SpyObj<WeatherService>;
+
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('WeatherService', ['getWeather']);
+
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
+      imports: [FormsModule],
+      providers: [{ provide: WeatherService, useValue: spy }],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    weatherServiceSpy = TestBed.inject(WeatherService) as jasmine.SpyObj<WeatherService>;
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'Weather-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Weather-app');
+  it('should show error when city is empty', () => {
+    component.city = '';
+    component.getWeather();
+    expect(component.errorMessage).toBe('Please enter a city name.');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Weather-app app is running!');
+  it('should handle error from weatherService', () => {
+    weatherServiceSpy.getWeather.and.returnValue(throwError(() => new Error('404 Not Found')));
+
+    component.city = 'InvalidCity';
+    component.getWeather();
+
+    expect(component.weatherData).toBeNull();
+    expect(component.errorMessage).toBe('Invalid Location.');
   });
 });
