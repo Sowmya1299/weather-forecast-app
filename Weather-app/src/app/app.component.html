@@ -1,32 +1,26 @@
-<div style="max-width: 400px; margin: auto; padding: 1rem;">
-  <h2>Weather App</h2>
-  <input
-    [(ngModel)]="city"
-    placeholder="Enter city"
-    (keyup.enter)="getWeather()"
-    style="width: 100%; padding: 8px; margin-bottom: 10px;"
-  />
-  <button (click)="getWeather()" style="width: 100%; padding: 8px;">
-    Get Weather
-  </button>
+<div class="background">
+  <div class="container">
+    <h2>Weather App</h2>
+    <input
+      [(ngModel)]="city"
+      placeholder="Enter city"
+      (keyup.enter)="getWeather()"
+      class="city-input"
+    />
+    <button (click)="getWeather()" class="btn-get-weather">
+      Get Weather
+    </button>
 
-  <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
-    {{ errorMessage }}
-  </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
 
-  <div *ngIf="weatherData" style="margin-top: 20px; border: 1px solid #ccc; padding: 1rem;">
-    <h3>{{ weatherData.name }}</h3>
-    <p>
-      <strong>Temperature:</strong> {{ weatherData.main.temp }}°C
-    </p>
-    <p>
-      <strong>Feels Like:</strong> {{ weatherData.main.feels_like }}°C
-    </p>
-    <p>
-      <strong>Humidity:</strong> {{ weatherData.main.humidity }}%
-    </p>
-    <p>
-      <strong>Wind:</strong> {{ weatherData.wind.speed }} m/s, {{ weatherData.wind.deg }}°
-    </p>
+    <div *ngIf="weatherData" class="weather-data">
+      <h3>{{ weatherData.name }}</h3>
+      <p><strong>Temperature:</strong> {{ weatherData.main.temp }}°C</p>
+      <p><strong>Feels Like:</strong> {{ weatherData.main.feels_like }}°C</p>
+      <p><strong>Humidity:</strong> {{ weatherData.main.humidity }}%</p>
+      <p><strong>Wind:</strong> {{ weatherData.wind.speed }} m/s, {{ weatherData.wind.deg }}°</p>
+    </div>
   </div>
 </div>

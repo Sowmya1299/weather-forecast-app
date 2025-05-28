@@ -23,7 +23,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(city: string): Observable<WeatherResponse> {
-    const url = `http://localhost:8080/api/weather/${encodeURIComponent(city)}`;
+    const url = `http://18.191.246.221:8080/api/weather/${encodeURIComponent(city)}`;
     return this.http.get<WeatherResponse>(url);
   }
 }

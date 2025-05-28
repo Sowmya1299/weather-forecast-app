@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+.container {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  box-sizing: border-box;
+  margin: auto;
+  z-index: 1;
+}
+
+.city-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.btn-get-weather {
+  width: 100%;
+  padding: 8px;
+  background-color: #a8edea;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-get-weather:hover {
+  background-color: #85d6d6;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.weather-data {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.weather-data h3 {
+  margin-top: 0;
+}
